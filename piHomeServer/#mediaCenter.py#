@@ -1,0 +1,32 @@
+import eyed3
+import os
+
+class song:
+
+    def __init__(self, filename, directory):
+        self.filename = filename
+        self.directory = directory
+        self.url = '/MediaCenter/MusicLibrary/play/'+replace_all(filename, ' ','_')+'/'
+        tags = eyed3.load(directory + filename).tag
+        self.artist = tags.artist
+        self.album = tags.album
+        self.title = tags.title
+        self.track_number = tags.track_num
+
+def get_songs(path):
+    # Returns the names of all the files in a particular directory
+    song_files = [files for dirpath, dirnames, files in os.walk(os.path.abspath(path))][0]
+    return [song(filename, path) for filename in song_files if filename != 'omxplayer.log' and filename != 'omxplayer.old.log']
+
+def replace_all(string, target, replacement):
+        no_target = string.split(target)
+        if len(no_target) > 1:
+            new_string = ''
+            l_nt=len(no_target)
+            for substring_number in range(0,l_nt-1):
+                new_string += no_target[substring_number]+replacement
+            new_string += no_target[substring_number+1]
+        else:
+            new_string = string
+        return new_string
+

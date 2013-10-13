@@ -1,0 +1,21 @@
+<html>
+<title>Music Player - Now Playing - {{ song }}</title>
+<body>
+<p>Now Playing - {{ song }}</p>
+{% if action %}
+  {% ifequal action 'pause' %}
+    <p>Paused</p>
+  {% endifequal %}
+  {% ifequal action 'play' %}
+  {% endifequal %}
+  {% ifequal action 'Invalid' %}
+    <p>Please select a valid option </p>
+  {% endifequal %}
+{% endif %}
+    <form action="" method="get">
+        <input type="text" name="action">
+        <input type="submit" value="action">
+    </form>
+</body>
+</html>
+
